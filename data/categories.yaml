@@ -1,0 +1,6 @@
+# 表示順やカテゴリ名の定義（必要に応じて拡張）
+categories:
+  - Events
+  - Actions
+  - Flow Control
+  - Data

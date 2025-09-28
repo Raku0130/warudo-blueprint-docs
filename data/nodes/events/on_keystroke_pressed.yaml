@@ -1,0 +1,55 @@
+id: on_keystroke_pressed
+name: On Keystroke Pressed
+category: Events
+since: 1.0.0
+deprecated: false
+summary: 指定キーが押された瞬間にフローを開始するイベントノード。
+description: >
+  キー押下でトリガーされるイベント。Enter（フロー入力）は持たず、Exit（フロー出力）のみ。
+  長押し・連打の扱いは `repeat_interval` で制御可能。
+tags: [event, input, keyboard]
+
+ports:
+  flow_inputs: []
+  flow_outputs:
+    - name: Exit
+      description: イベント発火時に後続を実行
+  data_inputs:
+    - name: key
+      type: KeyCode
+      required: true
+      default: K
+      enum: [A, B, C, D, E, F, G, H, I, J, K]
+    - name: repeat_interval
+      type: float
+      required: false
+      default: 0.0
+      constraints:
+        min: 0.0
+        unit: seconds
+  data_outputs:
+    - name: pressed_at
+      type: timestamp
+      description: 押下時刻（エポック秒）
+
+behavior:
+  triggers:
+    - type: key_down
+      condition: key == configured key
+  notes:
+    - 同時押しは未サポート（将来の拡張で変更の可能性あり）
+
+examples:
+  - title: スペース押下でカメラを揺らす
+    mermaid: |
+      flowchart LR
+        E[On Keystroke Pressed] -->|Exit| A[Shake Camera]
+        E --- k[(key=SPACE)]
+  - title: 0.3秒間隔でリピート
+    snippet: |
+      key: SPACE
+      repeat_interval: 0.3
+
+links:
+  related_nodes: [shake_camera, throttle_flow]
+  references: []

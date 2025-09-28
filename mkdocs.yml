@@ -1,0 +1,21 @@
+site_name: Warudo Blueprint Spec
+site_url: https://<your_github_user>.github.io/warudo-blueprint-docs
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+plugins:
+  - search
+  - mermaid2
+  - awesome-pages
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.highlight
+  - pymdownx.keys

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Warudo Blueprint Node",
+  "type": "object",
+  "required": ["id", "name", "category", "summary", "ports"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_.-]+$" },
+    "name": { "type": "string" },
+    "category": { "type": "string" },
+    "since": { "type": "string" },
+    "deprecated": { "type": "boolean" },
+    "summary": { "type": "string" },
+    "description": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "ports": {
+      "type": "object",
+      "required": ["flow_inputs", "flow_outputs", "data_inputs", "data_outputs"],
+      "properties": {
+        "flow_inputs":  { "type": "array", "items": { "$ref": "#/$defs/flowPort" } },
+        "flow_outputs": { "type": "array", "items": { "$ref": "#/$defs/flowPort" } },
+        "data_inputs":  { "type": "array", "items": { "$ref": "#/$defs/dataPort" } },
+        "data_outputs": { "type": "array", "items": { "$ref": "#/$defs/dataPort" } }
+      }
+    },
+    "behavior": { "type": "object" },
+    "examples": { "type": "array" },
+    "links": { "type": "object" }
+  },
+  "$defs": {
+    "flowPort": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "dataPort": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "required": { "type": "boolean" },
+        "default": {},
+        "description": { "type": "string" },
+        "enum": { "type": "array" },
+        "constraints": { "type": "object" }
+      }
+    }
+  }
+}
